@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Neighbourhood App</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' text='text/css' href='css/styles.css'>
+    <script type='text/javascript' src='bower_components/jquery/dist/jquery.min.js'></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRXep7hwBmSwq0ikTKLYABDnFO2rNJytI&callback=initMap"></script>
+    <script type='text/javascript' src='bower_components/knockout/dist/knockout.js'></script>
+    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
+    </script>
+    <script type='text/javascript' src='js/main.js'></script>
+</head>
+
+<body>
+    <div class="container" id="navigation">
+        <h1>Neighbourhood Map</h1>
+
+        <!--- Search --->
+        <input class="searchbar" type='input' name='search' placeholder='Search. . . i.e Coffee' data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+
+        <div id="location-list">
+            <ul data-bind="visible:query, template: {name: 'places', foreach: search}">
+            </ul>
+
+            <script type="text/html" id="places">
+                <li class="btn" data-bind="text: name, click: openInfowindow"></li>
+            </script>
+        </div>
+
+        <!--- Google Map --->
+        <div id='map'></div>
+</body>
+
+</html>
