@@ -101,7 +101,7 @@ function initMap() {
             new Location('Coffee To Go', 53.797950, -1.549262, '4bf6c03013aed13a6823eaf7'),
         ],
 
-        query: ko.observable(''),
+        query: ko.observable('coffee'),
     };
     // Search function to filter throught the locationsModel location list based on the name of the location
     locationsModel.search = ko.dependentObservable(function() {
