@@ -61,7 +61,11 @@ function initMap() {
                     // photoURL.push('<img alt="Coffe Shop image here" width="200" src='+ data.response.tips.items[0].photourl +'>')
 
                 }).done(function() {
+                  if (comments.length === 0){
+                    self.content = '<div style="display:inline"><img alt="FourSquare Icon" height="60" src="images/foursquareicon.jpg"></div>' + '<h2 style="display:inline">' + self.name + '</h2>' + '<h4>Most Recent Comments</h4>' + '<ol>Sorry no comments available at the moment!</ol>';
+                  }else{
                 self.content = '<div style="display:inline"><img alt="FourSquare Icon" height="60" src="images/foursquareicon.jpg"></div>' + '<h2 style="display:inline">' + self.name + '</h2>' + '<h4>Most Recent Comments</h4>' + '<ol>' + comments.join('') + '</ol>';
+              }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 self.content = '<h2>' + self.name + '</h2>' + '<h4>Most Recent Comments</h4>' + '<h5>Oops. There was a problem retrieving this location\'s comments.</h5>';
                 console.log('getJSON request failed! ' + textStatus);
@@ -107,9 +111,13 @@ function initMap() {
     locationsModel.search = ko.dependentObservable(function() {
         var self = this;
         var search = this.query().toLowerCase();
+        if (search === 0){
+        return ko.utils.arrayFilter(locationsModel);
+      }else{
         return ko.utils.arrayFilter(self.locations, function(location) {
             return location.name.toLowerCase().indexOf(search) >= 0;
         });
+      }
     }, locationsModel);
 
     ko.applyBindings(locationsModel);
