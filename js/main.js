@@ -105,7 +105,7 @@ function initMap() {
             new Location('Coffee To Go', 53.797950, -1.549262, '4bf6c03013aed13a6823eaf7'),
         ],
 
-        query: ko.observable('coffee'),
+        query: ko.observable(''),
     };
     // Search function to filter throught the locationsModel location list based on the name of the location
     locationsModel.search = ko.dependentObservable(function() {
@@ -132,6 +132,6 @@ function toggleBounce(marker) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
             marker.setAnimation(null);
-        }, 600);
+        }, 1400);
     }
 };
