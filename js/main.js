@@ -108,7 +108,7 @@ function initMap() {
         query: ko.observable(''),
     };
     // Search function to filter throught the locationsModel location list based on the name of the location
-    locationsModel.search = ko.dependentObservable(function() {
+    locationsModel.search = ko.computed(function() {
         var self = this;
         var search = this.query().toLowerCase();
         if (search === 0){
