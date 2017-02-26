@@ -26,13 +26,19 @@ function initMap() {
         zoom: 15
     });
 
+
+
+
+
+
     // model
-    var Location = function(name, lat, lng, venueId) {
+    var Location = function(name, lat, lng, venueId, markerBool) {
         var self = this;
         this.name = name;
         this.lng = lng;
         this.lat = lat;
         this.venueId = venueId;
+        this.markerBool = markerBool;
 
         // gets the markers to be place on the map
         this.marker = new google.maps.Marker({
@@ -40,9 +46,8 @@ function initMap() {
             map: map,
             animation: google.maps.Animation.DROP,
             title: self.name,
+            visible: self.markerBool,
         });
-
-
 
 
         // Get comments to be displayed in the infowindow from from foursquare for the marker location.
@@ -93,16 +98,16 @@ function initMap() {
     var locationsModel = {
 
         locations: [
-            new Location('Costa Coffee 1', 53.801678, -1.545176, '4b750e48f964a52074fc2de3'),
-            new Location('Costa Coffee 2', 53.802851, -1.5519717, '4ddcb190b0fba481fc878e24'),
-            new Location('Costa Coffee 3', 53.807407, -1.551241, '50c9ee26e4b0e4eaff216730'),
-            new Location('Physics Coffee Bar', 53.805428, -1.552784, '4ece2e17722e01c57fc7dd5a'),
-            new Location('Costa Coffee 4', 53.807363, -1.5511, '5447b524498ec638a88e4ef6'),
-            new Location('Costa Coffee 5', 53.804482, -1.540508, '5049b28fe4b01e5032fd40e7'),
-            new Location('Coffee Belt', 53.799565, -1.547951, '53089c4e498e2b4a97255056'),
-            new Location('Costa Coffee 6', 53.802517, -1.543577, '52a30d3711d24d2c29c97c3c'),
-            new Location('Coffee Rand', 53.805326, -1.549201, '4dac22506a2303012f316699'),
-            new Location('Coffee To Go', 53.797950, -1.549262, '4bf6c03013aed13a6823eaf7'),
+            new Location('Costa Coffee 1', 53.801678, -1.545176, '4b750e48f964a52074fc2de3', true),
+            new Location('Costa Coffee 2', 53.802851, -1.5519717, '4ddcb190b0fba481fc878e24', true),
+            new Location('Costa Coffee 3', 53.807407, -1.551241, '50c9ee26e4b0e4eaff216730', true),
+            new Location('Physics Coffee Bar', 53.805428, -1.552784, '4ece2e17722e01c57fc7dd5a', true),
+            new Location('Costa Coffee 4', 53.807363, -1.5511, '5447b524498ec638a88e4ef6', true),
+            new Location('Costa Coffee 5', 53.804482, -1.540508, '5049b28fe4b01e5032fd40e7', true),
+            new Location('Coffee Belt', 53.799565, -1.547951, '53089c4e498e2b4a97255056', true),
+            new Location('Costa Coffee 6', 53.802517, -1.543577, '52a30d3711d24d2c29c97c3c', true),
+            new Location('Coffee Rand', 53.805326, -1.549201, '4dac22506a2303012f316699', true),
+            new Location('Coffee To Go', 53.797950, -1.549262, '4bf6c03013aed13a6823eaf7', true),
         ],
 
         query: ko.observable(''),
@@ -111,11 +116,12 @@ function initMap() {
     locationsModel.search = ko.computed(function() {
         var self = this;
         var search = this.query().toLowerCase();
+
         if (search === 0){
         return ko.utils.arrayFilter(locationsModel);
       }else{
         return ko.utils.arrayFilter(self.locations, function(location) {
-            return location.name.toLowerCase().indexOf(search) >= 0;
+          return location.name.toLowerCase().indexOf(search) >= 0;
         });
       }
     }, locationsModel);

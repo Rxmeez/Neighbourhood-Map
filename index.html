@@ -23,7 +23,7 @@
         <input class="searchbar" type='input' name='search' placeholder='Search. . . i.e Coffee' data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
 
         <div id="location-list">
-            <ul data-bind="visible:query, template: {name: 'places', foreach: search}">
+            <ul data-bind="template: {name: 'places', foreach: search}">
             </ul>
 
             <script type="text/html" id="places">
