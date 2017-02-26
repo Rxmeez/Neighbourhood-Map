@@ -116,7 +116,15 @@ function initMap() {
             return ko.utils.arrayFilter(locationsModel);
         } else {
             return ko.utils.arrayFilter(self.locations, function(location) {
-                return location.name.toLowerCase().indexOf(search) >= 0;
+                isMatched = location.name.toLowerCase().indexOf(search) >= 0;
+                if (isMatched) {
+                    // Location match keywords, show marker in here
+                    location.marker.setVisible(true);
+                } else {
+                    // Location doesn't match keywords, hide marker in here
+                    location.marker.setVisible(false);
+                }
+                return isMatched;
             });
         }
     }, locationsModel);
@@ -127,15 +135,13 @@ function initMap() {
 // Add bounce to a marker
 function toggleBounce(marker) {
     // Google map documentation shows to keep one "=" instead of two. Does not work with "=="
-    if (marker.setAnimation() !== null) {
+
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
         marker.setAnimation(null);
-    } else {
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-        setTimeout(function() {
-            marker.setAnimation(null);
-        }, 1400);
-    }
+    }, 1400);
 }
+
 
 function googleError() {
     alert("Error! Map won't load!"); //if map doesnt load
