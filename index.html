@@ -6,12 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet' text='text/css' href='css/styles.css'>
-      <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='css/styles.css'>
+    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
     <script type='text/javascript' src='bower_components/jquery/dist/jquery.min.js'></script>
     <script type='text/javascript' src='bower_components/knockout/dist/knockout.js'></script>
     <script type='text/javascript' src='js/main.js'></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRXep7hwBmSwq0ikTKLYABDnFO2rNJytI&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRXep7hwBmSwq0ikTKLYABDnFO2rNJytI&callback=initMap" onerror="googleError()"></script>
 </head>
 
 <body>
@@ -19,8 +19,8 @@
         <h1>Neighbourhood Map</h1>
 
 
-        <!--- Search --->
-        <input class="searchbar" type='input' name='search' placeholder='Search. . . i.e Coffee' data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+        <!-- Search -->
+        <input class="searchbar" name='search' placeholder='Search. . . i.e Coffee' data-bind="value: query, valueUpdate: 'keyup'">
 
         <div id="location-list">
             <ul data-bind="template: {name: 'places', foreach: search}">
@@ -31,9 +31,9 @@
             </script>
         </div>
 
-        <!--- Google Map --->
+        <!-- Google Map -->
         <div id='map'></div>
-              </div>
+    </div>
 </body>
 
 </html>
